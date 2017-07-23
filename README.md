@@ -2,6 +2,17 @@
 
 Helper functions primarily for use with node.js [midi][midi] package.
 
+## Install
+
+midi-util has been developed on node@8.1.4 | npm@5.30, though it should work on any node version
+that supports arrow functions, let, const, and object property shorthand.
+
+```sh
+npm i @lokua/midi-util --save
+# or
+yarn add @lokua/midi-util --save
+```
+
 ## API
 
 Note: midi messages are of the form `[status, data1, data2]` (as returned by the [midi][midi] lib).
