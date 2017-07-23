@@ -1,7 +1,7 @@
 {
   "name": "@lokua/midi-util",
   "version": "0.0.1",
-  "description": "wrapper around node.js midi package",
+  "description": "Helper functions primarily for use with `midi` package",
   "main": "index.js",
   "repository": {
     "type": "git",

@@ -18,6 +18,9 @@ const statusTypes = Object.keys(statusCodes).reduce((acc, code) => {
   return acc
 }, {})
 
+const codeToType = code => statusCodes[code]
+const typeToCode = type => statusTypes[type]
+
 const _is = statusType => status => {
   const n = statusTypes[statusType]
   return status >= n && status < n + 16
@@ -52,9 +55,6 @@ const getStatus = messageOrStatus =>
 
 const getChannel = messageOrStatus => getStatus(messageOrStatus).toString(16)[1]
 
-const codeToType = code => statusCodes[code]
-const typeToCode = type => statusTypes[type]
-
 module.exports = {
   statusCodes,
   statusTypes,
@@ -67,6 +67,5 @@ module.exports = {
   ftom,
   listPorts,
   getPortNumber,
-  getStatus,
   getChannel
 }
