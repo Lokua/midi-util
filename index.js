@@ -14,21 +14,17 @@ const statusCodes = {
 }
 
 const statusTypes = Object.keys(statusCodes).reduce((acc, code) => {
-  acc[statusCodes[code]] = code
+  acc[statusCodes[code]] = +code
   return acc
 }, {})
 
 const codeToType = code => statusCodes[code]
 const typeToCode = type => statusTypes[type]
 
-const _is = statusType => status => {
-  const n = statusTypes[statusType]
-  return status >= n && status < n + 16
-}
-
-const isControlChange = _is(`cc`)
-const isNoteOn = _is(`noteOn`)
-const isNoteOff = _is(`noteOff`)
+const _is = code => status => status >= code && status < code + 16
+const isControlChange = _is(176)
+const isNoteOn = _is(144)
+const isNoteOff = _is(128)
 
 const mtof = m => Math.pow(2, (m - 69) / 12) * 440
 
@@ -53,7 +49,7 @@ const getPortNumber = (portType, name) => {
 const getStatus = messageOrStatus =>
   Array.isArray(messageOrStatus) ? messageOrStatus[0] : messageOrStatus
 
-const getChannel = messageOrStatus => getStatus(messageOrStatus).toString(16)[1]
+const getChannel = messageOrStatus => parseInt(getStatus(messageOrStatus).toString(16)[1], 16)
 
 module.exports = {
   statusCodes,
