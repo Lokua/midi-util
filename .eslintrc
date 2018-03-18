@@ -1,6 +1,6 @@
 {
   "extends": "lokua",
   "env": {
-    "jasmine": true
+    "jest": true
   }
 }

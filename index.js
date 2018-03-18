@@ -1,67 +1,25 @@
-const midi = require(`midi`)
+exports.codeTypeMap = new Map([
+  [144, 'noteOn'],
+  [128, 'noteOff'],
+  [224, 'pitchBend'],
+  [176, 'controlChange'],
+  [208, 'channelPressure'],
+  [248, 'clock'],
+  [250, 'start'],
+  [252, 'stop'],
+  [251, 'continue'],
+  [242, 'songPosition']
+])
 
-const statusCodes = {
-  144: `noteOn`,
-  128: `noteOff`,
-  224: `pitchBend`,
-  176: `cc`,
-  208: `channelPressure`,
-  248: `clock`,
-  250: `start`,
-  252: `stop`,
-  251: `continue`,
-  242: `songPosition`
+exports.typeCodeMap = new Map()
+
+const is = code => status => status >= code && status < code + 16
+
+for (const [code, type] of exports.codeTypeMap) {
+  exports.typeCodeMap.set(type, code)
+  exports[`is${type.charAt(0).toUpperCase() + type.slice(1)}`] = is(code)
 }
 
-const statusTypes = Object.keys(statusCodes).reduce((acc, code) => {
-  acc[statusCodes[code]] = +code
-  return acc
-}, {})
-
-const codeToType = code => statusCodes[code]
-const typeToCode = type => statusTypes[type]
-
-const _is = code => status => status >= code && status < code + 16
-const isControlChange = _is(176)
-const isNoteOn = _is(144)
-const isNoteOff = _is(128)
-
-const mtof = m => Math.pow(2, (m - 69) / 12) * 440
-
-const ftom = f => Math.round((12 * (Math.log(f / 440) / Math.log(2))) + 69)
-
-const listPorts = portType => {
-  const io = new midi[portType]()
-  return Array(io.getPortCount()).fill(null).map((_, index) => io.getPortName(index))
-}
-
-const getPortNumber = (portType, name) => {
-  const io = new midi[portType]()
-  const matches = str => name instanceof RegExp ? name.test(str) : str === name
-  for (let i = 0; i < io.getPortCount(); i++) {
-    if (matches(io.getPortName(i))) {
-      return i
-    }
-  }
-  return -1
-}
-
-const getStatus = messageOrStatus =>
-  Array.isArray(messageOrStatus) ? messageOrStatus[0] : messageOrStatus
-
-const getChannel = messageOrStatus => parseInt(getStatus(messageOrStatus).toString(16)[1], 16)
-
-module.exports = {
-  statusCodes,
-  statusTypes,
-  codeToType,
-  typeToCode,
-  isControlChange,
-  isNoteOn,
-  isNoteOff,
-  mtof,
-  ftom,
-  listPorts,
-  getPortNumber,
-  getChannel
-}
+exports.mtof = m => Math.pow(2, (m - 69) / 12) * 440
+exports.ftom = f => Math.round(12 * (Math.log(f / 440) / Math.log(2)) + 69)
+exports.getChannel = status => status % 16
