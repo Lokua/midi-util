@@ -1,6 +1,6 @@
 # midi-util
 
-Helper functions primarily for use with node.js [midi][midi] package.
+CommonJS helpers for working with midi messages.
 
 ## Install
 
@@ -14,37 +14,22 @@ npm i @lokua/midi-util --save
 
 #### [`codeTypeMap: Map<number, string>`](#codeTypeMap)
 
-```js
-Map {
-  144 => 'noteOn',
-  128 => 'noteOff',
-  224 => 'pitchBend',
-  176 => 'controlChange',
-  208 => 'channelPressure',
-  248 => 'clock',
-  250 => 'start',
-  252 => 'stop',
-  251 => 'continue',
-  242 => 'songPosition' }
+```
+144 noteOn
+128 noteOff
+224 pitchBend
+176 controlChange
+208 channelPressure
+248 clock
+250 start
+252 stop
+251 continue
+242 songPosition
 ```
 
 #### [`typeCodeMap: Map<string, number>`](#typeCodeMap)
 
 Inverse of `codeTypeMap`.
-
-```js
-Map {
-  'noteOn' => 144,
-  'noteOff' => 128,
-  'pitchBend' => 224,
-  'controlChange' => 176,
-  'channelPressure' => 208,
-  'clock' => 248,
-  'start' => 250,
-  'stop' => 252,
-  'continue' => 251,
-  'songPosition' => 242 }
-```
 
 #### [`isNoteOn(number): boolean`](#isNoteOn)
 
