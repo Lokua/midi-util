@@ -31,25 +31,25 @@ npm i @lokua/midi-util --save
 
 Inverse of `codeTypeMap`.
 
-#### [`isNoteOn(number): boolean`](#isNoteOn)
+#### [`isNoteOn(status: number): boolean`](#isNoteOn)
 
-#### [`isNoteOff(number): boolean`](#isNoteOff)
+#### [`isNoteOff(status: number): boolean`](#isNoteOff)
 
-#### [`isPitchBend(number): boolean`](#isPitchBend)
+#### [`isPitchBend(status: number): boolean`](#isPitchBend)
 
-#### [`isControlChange(number): boolean`](#isControlChange)
+#### [`isControlChange(status: number): boolean`](#isControlChange)
 
-#### [`isChannelPressure(number): boolean`](#isChannelPressure)
+#### [`isChannelPressure(status: number): boolean`](#isChannelPressure)
 
-#### [`isClock(number): boolean`](#isClock)
+#### [`isClock(status: number): boolean`](#isClock)
 
-#### [`isStart(number): boolean`](#isStart)
+#### [`isStart(status: number): boolean`](#isStart)
 
-#### [`isStop(number): boolean`](#isStop)
+#### [`isStop(status: number): boolean`](#isStop)
 
-#### [`isContinue(number): boolean`](#isContinue)
+#### [`isContinue(status: number): boolean`](#isContinue)
 
-#### [`isSongPosition(number): boolean`](#isSongPosition)
+#### [`isSongPosition(status: number): boolean`](#isSongPosition)
 
 #### [`mtof(note: number): number`](#mtof)
 
@@ -59,9 +59,13 @@ Convert MIDI note number to frequency
 
 Convert frequency to MIDI note number
 
-#### [`getChannel(messageOrStatus: array[string]|number): number`](#getChannel)
+#### [`getChannel(status: number): number`](#getChannel)
 
 Given a midi message status, returns the corresponding MIDI channel.
+
+#### [`getType(status: number): string`](#getType)
+
+Returns the message type (ie. `noteOn`, `controlChange`) for a given status
 
 ## License
 

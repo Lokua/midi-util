@@ -43,5 +43,9 @@ Object.keys(midiUtil).forEach(key => {
 })
 
 for (let i = 144; i < 144 + 16; i++) {
-  assert.ok(midiUtil.getChannel(i) === 16)
+  assert.equal(midiUtil.getChannel(i), i - 144)
 }
+
+test('getType', () => {
+  assert.equal(midiUtil.getType(186), 'controlChange')
+})

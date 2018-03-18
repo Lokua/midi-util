@@ -21,5 +21,15 @@ for (const [code, type] of exports.codeTypeMap) {
 }
 
 exports.mtof = m => Math.pow(2, (m - 69) / 12) * 440
+
 exports.ftom = f => Math.round(12 * (Math.log(f / 440) / Math.log(2)) + 69)
+
 exports.getChannel = status => status % 16
+
+exports.getType = status => {
+  for (const [code, type] of exports.codeTypeMap) {
+    if (is(code)(status)) {
+      return type
+    }
+  }
+}
