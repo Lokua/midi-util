@@ -2,9 +2,12 @@
   "name": "@lokua/midi-util",
   "version": "0.3.0",
   "description": "Helpers for working with midi messages",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "node index.spec"
+    "test": "node index.spec",
+    "build": "babel src/index.js -o dist/index.js",
+    "clean": "rm -rvf dist && mkdir dist",
+    "prepublishOnly": "npm run clean && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,6 +20,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.6.1",
     "eslint": "^4.3.0",
     "eslint-config-lokua": "8.0.0"
   },
