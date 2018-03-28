@@ -4,7 +4,7 @@
   "description": "Helpers for working with midi messages",
   "main": "dist/index.js",
   "scripts": {
-    "test": "node index.spec",
+    "test": "node src/index.spec",
     "build": "babel src/index.js -o dist/index.js",
     "clean": "rm -rvf dist && mkdir dist",
     "prepublishOnly": "npm run clean && npm run test && npm run build"
