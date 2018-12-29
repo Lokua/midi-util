@@ -14,45 +14,45 @@ const test = (name, fn) => {
 
 for (let i = 0; i < 17; i++) {
   if (i < 16) {
-    assert.ok(midiUtil.isNoteOff(midiUtil.typeCodeMap.get('noteOff') + i))
-    assert.ok(midiUtil.isNoteOn(midiUtil.typeCodeMap.get('noteOn') + i))
+    assert.ok(midiUtil.isNoteOff(midiUtil.statusMap.get('noteOff') + i))
+    assert.ok(midiUtil.isNoteOn(midiUtil.statusMap.get('noteOn') + i))
     assert.ok(
       midiUtil.isPolyphonicAftertouch(
-        midiUtil.typeCodeMap.get('polyphonicAftertouch') + i
+        midiUtil.statusMap.get('polyphonicAftertouch') + i
       )
     )
     assert.ok(
-      midiUtil.isControlChange(midiUtil.typeCodeMap.get('controlChange') + i)
+      midiUtil.isControlChange(midiUtil.statusMap.get('controlChange') + i)
     )
     assert.ok(
-      midiUtil.isProgramChange(midiUtil.typeCodeMap.get('programChange') + i)
+      midiUtil.isProgramChange(midiUtil.statusMap.get('programChange') + i)
     )
     assert.ok(
       midiUtil.isChannelAftertouch(
-        midiUtil.typeCodeMap.get('channelAftertouch') + i
+        midiUtil.statusMap.get('channelAftertouch') + i
       )
     )
-    assert.ok(midiUtil.isPitchBend(midiUtil.typeCodeMap.get('pitchBend') + i))
+    assert.ok(midiUtil.isPitchBend(midiUtil.statusMap.get('pitchBend') + i))
   } else {
-    assert.ok(!midiUtil.isNoteOff(midiUtil.typeCodeMap.get('noteOff') + i))
-    assert.ok(!midiUtil.isNoteOn(midiUtil.typeCodeMap.get('noteOn') + i))
+    assert.ok(!midiUtil.isNoteOff(midiUtil.statusMap.get('noteOff') + i))
+    assert.ok(!midiUtil.isNoteOn(midiUtil.statusMap.get('noteOn') + i))
     assert.ok(
       !midiUtil.isPolyphonicAftertouch(
-        midiUtil.typeCodeMap.get('polyphonicAftertouch') + i
+        midiUtil.statusMap.get('polyphonicAftertouch') + i
       )
     )
     assert.ok(
-      !midiUtil.isControlChange(midiUtil.typeCodeMap.get('controlChange') + i)
+      !midiUtil.isControlChange(midiUtil.statusMap.get('controlChange') + i)
     )
     assert.ok(
-      !midiUtil.isProgramChange(midiUtil.typeCodeMap.get('programChange') + i)
+      !midiUtil.isProgramChange(midiUtil.statusMap.get('programChange') + i)
     )
     assert.ok(
       !midiUtil.isChannelAftertouch(
-        midiUtil.typeCodeMap.get('channelAftertouch') + i
+        midiUtil.statusMap.get('channelAftertouch') + i
       )
     )
-    assert.ok(!midiUtil.isPitchBend(midiUtil.typeCodeMap.get('pitchBend') + i))
+    assert.ok(!midiUtil.isPitchBend(midiUtil.statusMap.get('pitchBend') + i))
   }
 }
 

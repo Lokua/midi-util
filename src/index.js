@@ -1,53 +1,112 @@
 // https://www.midi.org/specifications-old/item/table-2-expanded-messages-list-status-bytes
-const codeTypeMap = new Map([
-  [128, 'noteOff'],
-  [144, 'noteOn'],
-  [160, 'polyphonicAftertouch'],
-  [176, 'controlChange'],
-  [192, 'programChange'],
-  [208, 'channelAftertouch'],
-  [224, 'pitchBend'],
-  [240, 'sysEx'],
-  [241, 'timeCode'],
-  [242, 'songPosition'],
-  [243, 'songSelect'],
-  [246, 'tuneRequest'],
-  [247, 'endOfSysEx'],
-  [248, 'clock'],
-  [250, 'start'],
-  [251, 'continue'],
-  [252, 'stop'],
-  [254, 'activeSensing'],
-  [255, 'systemReset'],
+
+const NOTE_OFF = 128
+const NOTE_ON = 144
+const POLYPHONIC_AFTERTOUCH = 160
+const CONTROL_CHANGE = 176
+const PROGRAM_CHANGE = 192
+const CHANNEL_AFTERTOUCH = 208
+const PITCHBEND = 224
+const SYSEX = 240
+const TIME_CODE = 241
+const SONG_POSITION = 242
+const SONG_SELECT = 243
+const TUNE_REQUEST = 246
+const END_OF_SYSEX = 247
+const CLOCK = 248
+const START = 250
+const CONTINUE = 251
+const STOP = 252
+const ACTIVE_SENSING = 254
+const SYSTEM_RESET = 255
+
+const statusMap = new Map([
+  [NOTE_OFF, 'noteOff'],
+  [NOTE_ON, 'noteOn'],
+  [POLYPHONIC_AFTERTOUCH, 'polyphonicAftertouch'],
+  [CONTROL_CHANGE, 'controlChange'],
+  [PROGRAM_CHANGE, 'programChange'],
+  [CHANNEL_AFTERTOUCH, 'channelAftertouch'],
+  [PITCHBEND, 'pitchBend'],
+  [SYSEX, 'sysex'],
+  [TIME_CODE, 'timeCode'],
+  [SONG_POSITION, 'songPosition'],
+  [SONG_SELECT, 'songSelect'],
+  [TUNE_REQUEST, 'tuneRequest'],
+  [END_OF_SYSEX, 'endOfSysex'],
+  [CLOCK, 'clock'],
+  [START, 'start'],
+  [CONTINUE, 'continue'],
+  [STOP, 'stop'],
+  [ACTIVE_SENSING, 'activeSensing'],
+  [SYSTEM_RESET, 'systemReset'],
+
+  ['noteOff', NOTE_OFF],
+  ['noteOn', NOTE_ON],
+  ['polyphonicAftertouch', POLYPHONIC_AFTERTOUCH],
+  ['controlChange', CONTROL_CHANGE],
+  ['programChange', PROGRAM_CHANGE],
+  ['channelAftertouch', CHANNEL_AFTERTOUCH],
+  ['pitchBend', PITCHBEND],
+  ['sysEx', SYSEX],
+  ['timeCode', TIME_CODE],
+  ['songPosition', SONG_POSITION],
+  ['songSelect', SONG_SELECT],
+  ['tuneRequest', TUNE_REQUEST],
+  ['endOfSysEx', END_OF_SYSEX],
+  ['clock', CLOCK],
+  ['start', START],
+  ['continue', CONTINUE],
+  ['stop', STOP],
+  ['activeSensing', ACTIVE_SENSING],
+  ['systemReset', SYSTEM_RESET],
+
+  ['NOTE_OFF', NOTE_OFF],
+  ['NOTE_ON', NOTE_ON],
+  ['POLYPHONIC_AFTERTOUCH', POLYPHONIC_AFTERTOUCH],
+  ['CONTROL_CHANGE', CONTROL_CHANGE],
+  ['PROGRAM_CHANGE', PROGRAM_CHANGE],
+  ['CHANNEL_AFTERTOUCH', CHANNEL_AFTERTOUCH],
+  ['PITCHBEND', PITCHBEND],
+  ['SYSEX', SYSEX],
+  ['TIME_CODE', TIME_CODE],
+  ['SONG_POSITION', SONG_POSITION],
+  ['SONG_SELECT', SONG_SELECT],
+  ['TUNE_REQUEST', TUNE_REQUEST],
+  ['END_OF_SYSEX', END_OF_SYSEX],
+  ['CLOCK', CLOCK],
+  ['START', START],
+  ['CONTINUE', CONTINUE],
+  ['STOP', STOP],
+  ['ACTIVE_SENSING', ACTIVE_SENSING],
+  ['SYSTEM_RESET', SYSTEM_RESET],
   // [244, 'reserved'],
   // [249, 'reserved']
   // [245, 'reserved'],
   // [253, 'reserved'],
 ])
 
-const codeTypeEntries = Array.from(codeTypeMap)
-
-const typeCodeMap = new Map(codeTypeEntries.map(([k, v]) => [v, k]))
+const statusEntries = Array.from(statusMap)
 
 const is = code => status => status >= code && status < code + 16
-const isNoteOff = is(typeCodeMap.get('noteOff'))
-const isNoteOn = is(typeCodeMap.get('noteOn'))
-const isPolyphonicAftertouch = is(typeCodeMap.get('polyphonicAftertouch'))
-const isControlChange = is(typeCodeMap.get('controlChange'))
-const isProgramChange = is(typeCodeMap.get('programChange'))
-const isChannelAftertouch = is(typeCodeMap.get('channelAftertouch'))
-const isPitchBend = is(typeCodeMap.get('pitchBend'))
-const isSysEx = status => status === typeCodeMap.get('sysEx')
-const isSongPosition = status => status === typeCodeMap.get('songPosition')
-const isSongSelect = status => status === typeCodeMap.get('songSelect')
-const isTuneRequest = status => status === typeCodeMap.get('tuneRequest')
-const isEndOfSysEx = status => status === typeCodeMap.get('endOfSysEx')
-const isClock = status => status === typeCodeMap.get('clock')
-const isStart = status => status === typeCodeMap.get('start')
-const isContinue = status => status === typeCodeMap.get('continue')
-const isStop = status => status === typeCodeMap.get('stop')
-const isActiveSensing = status => status === typeCodeMap.get('activeSensing')
-const isSystemReset = status => status === typeCodeMap.get('systemReset')
+const isNoteOff = is(statusMap.get('noteOff'))
+const isNoteOn = is(statusMap.get('noteOn'))
+const isPolyphonicAftertouch = is(statusMap.get('polyphonicAftertouch'))
+const isControlChange = is(statusMap.get('controlChange'))
+const isProgramChange = is(statusMap.get('programChange'))
+const isChannelAftertouch = is(statusMap.get('channelAftertouch'))
+const isPitchBend = is(statusMap.get('pitchBend'))
+const isSysex = status => status === statusMap.get('sysEx')
+const isSongPosition = status => status === statusMap.get('songPosition')
+const isSongSelect = status => status === statusMap.get('songSelect')
+const isTuneRequest = status => status === statusMap.get('tuneRequest')
+const isEndOfSysex = status => status === statusMap.get('endOfSysEx')
+const isClock = status => status === statusMap.get('clock')
+const isStart = status => status === statusMap.get('start')
+const isContinue = status => status === statusMap.get('continue')
+const isStop = status => status === statusMap.get('stop')
+const isActiveSensing = status => status === statusMap.get('activeSensing')
+const isSystemReset = status => status === statusMap.get('systemReset')
 
 const mtof = m => Math.pow(2, (m - 69) / 12) * 440
 const ftom = f => Math.round(12 * (Math.log(f / 440) / Math.log(2)) + 69)
@@ -57,12 +116,10 @@ const getChannel = status => internalGetStatus(status) % 16
 
 const getType = status => {
   const _status = internalGetStatus(status)
-  const isChannelAwareStatus =
-    status >= typeCodeMap.get('noteOff') &&
-    status <= typeCodeMap.get('pitchBend')
+  const isChannelAwareStatus = status >= NOTE_OFF && status <= PITCHBEND
 
   const [, type] =
-    codeTypeEntries.find(([code]) =>
+    statusEntries.find(([code]) =>
       isChannelAwareStatus ? is(code)(_status) : code === _status
     ) || []
 
@@ -72,8 +129,26 @@ const getType = status => {
 }
 
 module.exports = {
-  codeTypeMap,
-  typeCodeMap,
+  NOTE_OFF,
+  NOTE_ON,
+  POLYPHONIC_AFTERTOUCH,
+  CONTROL_CHANGE,
+  PROGRAM_CHANGE,
+  CHANNEL_AFTERTOUCH,
+  PITCHBEND,
+  SYSEX,
+  TIME_CODE,
+  SONG_POSITION,
+  SONG_SELECT,
+  TUNE_REQUEST,
+  END_OF_SYSEX,
+  CLOCK,
+  START,
+  CONTINUE,
+  STOP,
+  ACTIVE_SENSING,
+  SYSTEM_RESET,
+  statusMap,
   isNoteOff,
   isNoteOn,
   isPolyphonicAftertouch,
@@ -81,11 +156,11 @@ module.exports = {
   isProgramChange,
   isChannelAftertouch,
   isPitchBend,
-  isSysEx,
+  isSysex,
   isSongPosition,
   isSongSelect,
   isTuneRequest,
-  isEndOfSysEx,
+  isEndOfSysex,
   isClock,
   isStart,
   isContinue,

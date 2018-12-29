@@ -11,34 +11,47 @@ npm i @lokua/midi-util --save
 
 ## API
 
-#### [`codeTypeMap: Map<number, string>`](#codeTypeMap)
+#### [`(SCREAMING_CONSTANTS)`](#screamingConstants)
 
 ```js
-// code -> type
-128 -> 'noteOff'
-144 -> 'noteOn'
-160 -> 'polyphonicAftertouch'
-176 -> 'controlChange'
-192 -> 'programChange'
-208 -> 'channelAftertouch'
-224 -> 'pitchBend'
-240 -> 'sysEx'
-241 -> 'timeCode'
-242 -> 'songPosition'
-243 -> 'songSelect'
-246 -> 'tuneRequest'
-247 -> 'endOfSysEx'
-248 -> 'clock'
-250 -> 'start'
-251 -> 'continue'
-252 -> 'stop'
-254 -> 'activeSensing'
-255 -> 'systemReset'
+NOTE_OFF = 128
+NOTE_ON = 144
+POLYPHONIC_AFTERTOUCH = 160
+CONTROL_CHANGE = 176
+PROGRAM_CHANGE = 192
+CHANNEL_AFTERTOUCH = 208
+PITCHBEND = 224
+SYSEX = 240
+TIME_CODE = 241
+SONG_POSITION = 242
+SONG_SELECT = 243
+TUNE_REQUEST = 246
+END_OF_SYSEX = 247
+CLOCK = 248
+START = 250
+CONTINUE = 251
+STOP = 252
+ACTIVE_SENSING = 254
+SYSTEM_RESET = 255
 ```
 
-#### [`typeCodeMap: Map<string, number>`](#typeCodeMap)
+#### [`statusMap: Map<number|string, number|string>`](#codeTypeMap)
 
-Inverse of `codeTypeMap`.
+lookup readable status string by status code or vis a versa
+
+```js
+// status -> type
+128 -> 'noteOff'
+// etc...
+
+// type -> status
+'noteOff' -> 128
+// ...
+
+// screaming type -> status
+'NOTE_OFF' -> 128
+// ...
+```
 
 #### [`is***(statusOrMidiMessage: number | MidiMessage): boolean`](#is)
 
@@ -51,10 +64,11 @@ Check if a status byte or MIDI message is a certain status type
 - isProgramChange
 - isChannelAftertouch
 - isPitchBend
+- isSysex
 - isSongPosition
 - isSongSelect
 - isTuneRequest
-- isEndOfSysEx
+- isEndOfSysex
 - isClock
 - isStart
 - isContinue
