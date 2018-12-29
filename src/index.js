@@ -7,24 +7,22 @@ const codeTypeMap = new Map([
   [192, 'programChange'],
   [208, 'channelAftertouch'],
   [224, 'pitchBend'],
-
   [240, 'sysEx'],
-  // is this correct nomenclature?
   [241, 'timeCode'],
   [242, 'songPosition'],
   [243, 'songSelect'],
-  // [244, 'reserved'],
-  // [245, 'reserved'],
   [246, 'tuneRequest'],
   [247, 'endOfSysEx'],
   [248, 'clock'],
-  // [249, 'reserved']
   [250, 'start'],
   [251, 'continue'],
   [252, 'stop'],
-  // [253, 'reserved'],
   [254, 'activeSensing'],
   [255, 'systemReset'],
+  // [244, 'reserved'],
+  // [249, 'reserved']
+  // [245, 'reserved'],
+  // [253, 'reserved'],
 ])
 
 const codeTypeEntries = Array.from(codeTypeMap)
@@ -39,7 +37,7 @@ const isControlChange = is(typeCodeMap.get('controlChange'))
 const isProgramChange = is(typeCodeMap.get('programChange'))
 const isChannelAftertouch = is(typeCodeMap.get('channelAftertouch'))
 const isPitchBend = is(typeCodeMap.get('pitchBend'))
-
+const isSysEx = status => status === typeCodeMap.get('sysEx')
 const isSongPosition = status => status === typeCodeMap.get('songPosition')
 const isSongSelect = status => status === typeCodeMap.get('songSelect')
 const isTuneRequest = status => status === typeCodeMap.get('tuneRequest')
@@ -83,6 +81,7 @@ module.exports = {
   isProgramChange,
   isChannelAftertouch,
   isPitchBend,
+  isSysEx,
   isSongPosition,
   isSongSelect,
   isTuneRequest,
