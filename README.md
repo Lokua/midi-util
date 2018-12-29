@@ -35,7 +35,7 @@ ACTIVE_SENSING = 254
 SYSTEM_RESET = 255
 ```
 
-#### [`statusMap: Map<number|string, number|string>`](#codeTypeMap)
+#### [`statusMap: Map<number|string, number|string>`](#statusMap)
 
 lookup readable status string by status code or vis a versa
 
@@ -91,6 +91,20 @@ Given a midi message status, returns the corresponding MIDI channel.
 #### [`getType(statusOrMidiMessage: number | MidiMessage): string`](#getType)
 
 Returns the message type (ie. `noteOn`, `controlChange`) for a given status
+
+#### [`getPorts(): Promise<{ inputs: Array<MIDIInputPort>, outputs: Array<MIDIOutputPort> }>`](#getPorts)
+
+_Browser only_. Converts the `MIDIPortMap` objects returned by
+`navigator.requestMIDIAccess` into a hash of inputs and outputs arrays.
+
+#### [`findPortByName(test: RegExp|string, ports:MIDIPortMap|Array<MIDIPort>): ?MIDIPort`](#findPortByName)
+
+_Browser only_. Find a MIDIPort instance (either within an array of ports or
+MIDIInputMap, MIDIOutputMap, or any Map instance where the values are MIDIPorts)
+by exact string or RegExp.
+
+Hint: make sure to use the `i` flag when using RegExp to make matching easier on
+yourself
 
 ## License
 

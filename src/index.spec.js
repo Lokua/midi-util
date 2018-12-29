@@ -60,3 +60,22 @@ test('getType', () => {
   assert.equal(midiUtil.getType(186), 'controlChange')
   assert.equal(midiUtil.getType(250), 'start')
 })
+
+test('findPortByName (regexp, array)', () => {
+  const ports = [{ name: 'foo' }]
+
+  assert.equal(ports[0], midiUtil.findPortByName(/f/, ports))
+})
+
+test('findPortByName (regexp, map)', () => {
+  const ports = new Map([[0, { name: 'foo' }]])
+
+  assert.equal(ports.get(0), midiUtil.findPortByName(/f/, ports))
+})
+
+test('findPortByName (string, array)', () => {
+  const ports = [{ name: 'FoO' }]
+
+  assert.equal(ports[0], midiUtil.findPortByName('FoO', ports))
+  assert.ok(!midiUtil.findPortByName('foo', ports))
+})

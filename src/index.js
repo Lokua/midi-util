@@ -128,6 +128,25 @@ const getType = status => {
   }
 }
 
+async function getPorts() {
+  const { inputs, outputs } = await navigator.requestMIDIAccess()
+
+  return {
+    inputs: Array.from(inputs.values()),
+    outputs: Array.from(outputs.values()),
+  }
+}
+
+function findPortByName(test, ports) {
+  let ps = Array.isArray(ports)
+    ? ports
+    : Array.from(ports).map(entry => entry[1])
+
+  return test instanceof RegExp
+    ? ps.find(p => test.test(p.name))
+    : ps.find(p => p.name === test)
+}
+
 module.exports = {
   NOTE_OFF,
   NOTE_ON,
@@ -171,4 +190,6 @@ module.exports = {
   ftom,
   getChannel,
   getType,
+  getPorts,
+  findPortByName,
 }
