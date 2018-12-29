@@ -15,6 +15,9 @@ const test = (name, fn) => {
 for (let i = 0; i < 17; i++) {
   if (i < 16) {
     assert.ok(midiUtil.isNoteOff(midiUtil.statusMap.get('noteOff') + i))
+    // test works with array
+    assert.ok(midiUtil.isNoteOff([midiUtil.statusMap.get('noteOff') + i]))
+
     assert.ok(midiUtil.isNoteOn(midiUtil.statusMap.get('noteOn') + i))
     assert.ok(
       midiUtil.isPolyphonicAftertouch(

@@ -87,8 +87,14 @@ const statusMap = new Map([
 ])
 
 const statusEntries = Array.from(statusMap)
+const internalGetStatus = x => (Array.isArray(x) ? x[0] : x)
 
-const is = code => status => status >= code && status < code + 16
+// only for chanel aware status
+const is = code => status => {
+  const s = internalGetStatus(status)
+  return s >= code && s < code + 16
+}
+
 const isNoteOff = is(statusMap.get('noteOff'))
 const isNoteOn = is(statusMap.get('noteOn'))
 const isPolyphonicAftertouch = is(statusMap.get('polyphonicAftertouch'))
@@ -96,31 +102,38 @@ const isControlChange = is(statusMap.get('controlChange'))
 const isProgramChange = is(statusMap.get('programChange'))
 const isChannelAftertouch = is(statusMap.get('channelAftertouch'))
 const isPitchBend = is(statusMap.get('pitchBend'))
-const isSysex = status => status === statusMap.get('sysEx')
-const isSongPosition = status => status === statusMap.get('songPosition')
-const isSongSelect = status => status === statusMap.get('songSelect')
-const isTuneRequest = status => status === statusMap.get('tuneRequest')
-const isEndOfSysex = status => status === statusMap.get('endOfSysEx')
-const isClock = status => status === statusMap.get('clock')
-const isStart = status => status === statusMap.get('start')
-const isContinue = status => status === statusMap.get('continue')
-const isStop = status => status === statusMap.get('stop')
-const isActiveSensing = status => status === statusMap.get('activeSensing')
-const isSystemReset = status => status === statusMap.get('systemReset')
+
+const isSysex = status => internalGetStatus(status) === statusMap.get('sysEx')
+const isSongPosition = status =>
+  internalGetStatus(status) === statusMap.get('songPosition')
+const isSongSelect = status =>
+  internalGetStatus(status) === statusMap.get('songSelect')
+const isTuneRequest = status =>
+  internalGetStatus(status) === statusMap.get('tuneRequest')
+const isEndOfSysex = status =>
+  internalGetStatus(status) === statusMap.get('endOfSysEx')
+const isClock = status => internalGetStatus(status) === statusMap.get('clock')
+const isStart = status => internalGetStatus(status) === statusMap.get('start')
+const isContinue = status =>
+  internalGetStatus(status) === statusMap.get('continue')
+const isStop = status => internalGetStatus(status) === statusMap.get('stop')
+const isActiveSensing = status =>
+  internalGetStatus(status) === statusMap.get('activeSensing')
+const isSystemReset = status =>
+  internalGetStatus(status) === statusMap.get('systemReset')
 
 const mtof = m => Math.pow(2, (m - 69) / 12) * 440
 const ftom = f => Math.round(12 * (Math.log(f / 440) / Math.log(2)) + 69)
 
-const internalGetStatus = x => (Array.isArray(x) ? x[0] : x)
 const getChannel = status => internalGetStatus(status) % 16
 
 const getType = status => {
-  const _status = internalGetStatus(status)
-  const isChannelAwareStatus = status >= NOTE_OFF && status <= PITCHBEND
+  const s = internalGetStatus(status)
+  const isChannelAwareStatus = s >= NOTE_OFF && s <= PITCHBEND
 
   const [, type] =
     statusEntries.find(([code]) =>
-      isChannelAwareStatus ? is(code)(_status) : code === _status
+      isChannelAwareStatus ? is(code)(s) : code === s
     ) || []
 
   if (type) {
