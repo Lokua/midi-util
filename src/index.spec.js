@@ -12,40 +12,51 @@ const test = (name, fn) => {
   }
 }
 
-test('type / code maps should be inverse of each other', () => {
-  const keys = Array.from(midiUtil.codeTypeMap.keys())
-  const values = Array.from(midiUtil.typeCodeMap.values())
-  assert.deepEqual(keys, values)
-})
-
-const testIsFn = (code, fn) => {
-  const isInCodeRange = i => i >= code && i < code + 16
-
-  for (let i = 128; i < 256; i++) {
-    if (isInCodeRange(i)) {
-      assert.ok(fn(i))
-    } else {
-      assert.ok(!fn(i))
-    }
+for (let i = 0; i < 17; i++) {
+  if (i < 16) {
+    assert.ok(midiUtil.isNoteOff(midiUtil.typeCodeMap.get('noteOff') + i))
+    assert.ok(midiUtil.isNoteOn(midiUtil.typeCodeMap.get('noteOn') + i))
+    assert.ok(
+      midiUtil.isPolyphonicAftertouch(
+        midiUtil.typeCodeMap.get('polyphonicAftertouch') + i
+      )
+    )
+    assert.ok(
+      midiUtil.isControlChange(midiUtil.typeCodeMap.get('controlChange') + i)
+    )
+    assert.ok(
+      midiUtil.isProgramChange(midiUtil.typeCodeMap.get('programChange') + i)
+    )
+    assert.ok(
+      midiUtil.isChannelAftertouch(
+        midiUtil.typeCodeMap.get('channelAftertouch') + i
+      )
+    )
+    assert.ok(midiUtil.isPitchBend(midiUtil.typeCodeMap.get('pitchBend') + i))
+  } else {
+    assert.ok(!midiUtil.isNoteOff(midiUtil.typeCodeMap.get('noteOff') + i))
+    assert.ok(!midiUtil.isNoteOn(midiUtil.typeCodeMap.get('noteOn') + i))
+    assert.ok(
+      !midiUtil.isPolyphonicAftertouch(
+        midiUtil.typeCodeMap.get('polyphonicAftertouch') + i
+      )
+    )
+    assert.ok(
+      !midiUtil.isControlChange(midiUtil.typeCodeMap.get('controlChange') + i)
+    )
+    assert.ok(
+      !midiUtil.isProgramChange(midiUtil.typeCodeMap.get('programChange') + i)
+    )
+    assert.ok(
+      !midiUtil.isChannelAftertouch(
+        midiUtil.typeCodeMap.get('channelAftertouch') + i
+      )
+    )
+    assert.ok(!midiUtil.isPitchBend(midiUtil.typeCodeMap.get('pitchBend') + i))
   }
-}
-
-Object.keys(midiUtil).forEach(key => {
-  if (key.startsWith('is')) {
-    const type =
-      key
-        .slice(2)
-        .charAt(0)
-        .toLowerCase() + key.slice(3)
-
-    testIsFn(midiUtil.typeCodeMap.get(type), midiUtil[key])
-  }
-})
-
-for (let i = 144; i < 144 + 16; i++) {
-  assert.equal(midiUtil.getChannel(i), i - 144)
 }
 
 test('getType', () => {
   assert.equal(midiUtil.getType(186), 'controlChange')
+  assert.equal(midiUtil.getType(250), 'start')
 })
