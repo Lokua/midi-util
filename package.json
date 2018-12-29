@@ -1,6 +1,6 @@
 {
   "name": "@lokua/midi-util",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Helpers for working with midi messages",
   "main": "dist/index.js",
   "scripts": {
