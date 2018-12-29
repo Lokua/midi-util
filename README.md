@@ -10,46 +10,56 @@ npm i @lokua/midi-util --save
 
 ## API
 
-> Note: midi messages are of the form `[status, data1, data2]`
-
 #### [`codeTypeMap: Map<number, string>`](#codeTypeMap)
 
-```
-144 noteOn
-128 noteOff
-224 pitchBend
-176 controlChange
-208 channelPressure
-248 clock
-250 start
-252 stop
-251 continue
-242 songPosition
+```js
+// code -> type
+128 -> 'noteOff'
+144 -> 'noteOn'
+160 -> 'polyphonicAftertouch'
+176 -> 'controlChange'
+192 -> 'programChange'
+208 -> 'channelAftertouch'
+224 -> 'pitchBend'
+240 -> 'sysEx'
+241 -> 'timeCode'
+242 -> 'songPosition'
+243 -> 'songSelect'
+246 -> 'tuneRequest'
+247 -> 'endOfSysEx'
+248 -> 'clock'
+250 -> 'start'
+251 -> 'continue'
+252 -> 'stop'
+254 -> 'activeSensing'
+255 -> 'systemReset'
 ```
 
 #### [`typeCodeMap: Map<string, number>`](#typeCodeMap)
 
 Inverse of `codeTypeMap`.
 
-#### [`isNoteOn(status: number): boolean`](#isNoteOn)
+#### [`is***(statusOrMidiMessage: number | MidiMessage): boolean`](#is)
 
-#### [`isNoteOff(status: number): boolean`](#isNoteOff)
+Check is a status byte or MIDI message is a certain status type
 
-#### [`isPitchBend(status: number): boolean`](#isPitchBend)
-
-#### [`isControlChange(status: number): boolean`](#isControlChange)
-
-#### [`isChannelPressure(status: number): boolean`](#isChannelPressure)
-
-#### [`isClock(status: number): boolean`](#isClock)
-
-#### [`isStart(status: number): boolean`](#isStart)
-
-#### [`isStop(status: number): boolean`](#isStop)
-
-#### [`isContinue(status: number): boolean`](#isContinue)
-
-#### [`isSongPosition(status: number): boolean`](#isSongPosition)
+- isNoteOff
+- isNoteOn
+- isPolyphonicAftertouch
+- isControlChange
+- isProgramChange
+- isChannelAftertouch
+- isPitchBend
+- isSongPosition
+- isSongSelect
+- isTuneRequest
+- isEndOfSysEx
+- isClock
+- isStart
+- isContinue
+- isStop
+- isActiveSensing
+- isSystemReset
 
 #### [`mtof(note: number): number`](#mtof)
 
@@ -59,16 +69,14 @@ Convert MIDI note number to frequency
 
 Convert frequency to MIDI note number
 
-#### [`getChannel(status: number): number`](#getChannel)
+#### [`getChannel(statusOrMidiMessage: number | MidiMessage): number`](#getChannel)
 
 Given a midi message status, returns the corresponding MIDI channel.
 
-#### [`getType(status: number): string`](#getType)
+#### [`getType(statusOrMidiMessage: number | MidiMessage): string`](#getType)
 
 Returns the message type (ie. `noteOn`, `controlChange`) for a given status
 
 ## License
 
 MIT
-
-[midi]: https://github.com/justinlatimer/node-midi
