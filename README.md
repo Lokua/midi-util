@@ -99,14 +99,13 @@ _Browser only_. Converts the `MIDIPortMap` objects returned by
 
 #### [`findPortByName(test: RegExp|string, ports:MIDIPortMap|Array<MIDIPort>): ?MIDIPort`](#findPortByName)
 
-_Browser only_. Find a MIDIPort instance (either within an array of ports or
-MIDIInputMap, MIDIOutputMap, or any Map instance where the values are MIDIPorts)
-by exact string or RegExp.
+Find a port instance within an array of ports or a `Map<any, { name: string }>`
+structure by exact string or RegExp. (Actually, this is really a generic
+`findObjectByName` that works with arrays or maps, but, whatever).
 
-Hint: make sure to use the `i` flag when using RegExp to make matching easier on
-yourself
+Hint - use the `i` flag when using RegExp to make matching easier on yourself
 
-This method supports partial application so you can do the following:
+This method also supports partial application so you can do the following:
 
 ```js
 const { getPorts, findPortByName } = require('@lokua/midi-util)
