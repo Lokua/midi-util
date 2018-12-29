@@ -151,13 +151,15 @@ async function getPorts() {
 }
 
 function findPortByName(test, ports) {
-  let ps = Array.isArray(ports)
-    ? ports
-    : Array.from(ports).map(entry => entry[1])
+  const find = ps => {
+    let arr = Array.isArray(ps) ? ps : Array.from(ps).map(entry => entry[1])
 
-  return test instanceof RegExp
-    ? ps.find(p => test.test(p.name))
-    : ps.find(p => p.name === test)
+    return test instanceof RegExp
+      ? arr.find(p => test.test(p.name))
+      : arr.find(p => p.name === test)
+  }
+
+  return ports ? find(ports) : find
 }
 
 module.exports = {

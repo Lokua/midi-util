@@ -82,3 +82,10 @@ test('findPortByName (string, array)', () => {
   assert.equal(ports[0], midiUtil.findPortByName('FoO', ports))
   assert.ok(!midiUtil.findPortByName('foo', ports))
 })
+
+test('findPortByName (partial', () => {
+  const ports = [{ name: 'FoO' }]
+  const findFoo = midiUtil.findPortByName(/f/i)
+
+  assert.equal(ports[0], findFoo(ports))
+})

@@ -106,6 +106,20 @@ by exact string or RegExp.
 Hint: make sure to use the `i` flag when using RegExp to make matching easier on
 yourself
 
+This method supports partial application so you can do the following:
+
+```js
+const { getPorts, findPortByName } = require('@lokua/midi-util)
+
+// this
+const findMidiFighterTwister = findPortByName(/fighter\/twister/i)
+
+const { inputs, outputs } = await getPorts()
+const input = findMidiFighterTwister(inputs)
+const output = findMidiFighterTwister(outputs)
+
+```
+
 ## License
 
 MIT
