@@ -1,6 +1,7 @@
 # midi-util
 
-CommonJS helpers for working with midi messages.
+CommonJS constants for MIDI status types and some basic helper functions (mtof,
+ftom)
 
 ## Install
 
@@ -41,7 +42,7 @@ Inverse of `codeTypeMap`.
 
 #### [`is***(statusOrMidiMessage: number | MidiMessage): boolean`](#is)
 
-Check is a status byte or MIDI message is a certain status type
+Check if a status byte or MIDI message is a certain status type
 
 - isNoteOff
 - isNoteOn

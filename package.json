@@ -1,7 +1,7 @@
 {
   "name": "@lokua/midi-util",
   "version": "0.6.0",
-  "description": "Helpers for working with midi messages",
+  "description": "Constants for MIDI status types and some basic helper functions (mtof, ftom)",
   "main": "dist/index.js",
   "scripts": {
     "test": "node src/index.spec",
