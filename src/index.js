@@ -87,7 +87,13 @@ const statusMap = new Map([
 ])
 
 const statusEntries = Array.from(statusMap)
-const internalGetStatus = x => (Array.isArray(x) ? x[0] : x)
+const internalGetStatus = x =>
+  Object.prototype.toString
+    .call(x)
+    .toLowerCase()
+    .includes('array')
+    ? x[0]
+    : x
 
 // only for chanel aware status
 const is = code => status => {

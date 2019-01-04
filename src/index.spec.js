@@ -64,6 +64,12 @@ test('getType', () => {
   assert.equal(midiUtil.getType(250), 'start')
 })
 
+test('getType (works for array, UInt8, etc)', () => {
+  assert.equal(midiUtil.getType([186]), 'controlChange')
+  const uIntArray = new Uint8Array([186])
+  assert.equal(midiUtil.getType(uIntArray), 'controlChange')
+})
+
 test('findPortByName (regexp, array)', () => {
   const ports = [{ name: 'foo' }]
 
